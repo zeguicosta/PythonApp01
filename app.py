@@ -17,7 +17,7 @@ def exibir_titulo():
 def exibir_opcoes():
     print('1. Cadastrar restaurante')
     print('2. Listar restaurantes')
-    print('3. Ativar restaurante')
+    print('3. Alternar estado de ativação do restaurante')
     print('4. Sair\n')
 
 def voltar():
@@ -30,11 +30,14 @@ def opcao_invalida():
 
 def exibir_subtitulo(texto):
     os.system('clear')
+    linha = '-' * (len(texto))
+    print(linha)
     print(texto)
+    print(linha)
     print()
 
 def cadastrar():
-    exibir_subtitulo('------ CADASTRO DE NOVOS RESTAURANTES -----')
+    exibir_subtitulo('|     CADASTRO DE NOVOS RESTAURANTES     |')
     nome_restaurante = input('Digite o nome do restaurante que deseja cadastrar: ')
     categoria = input(f'Digite a categoria de {nome_restaurante}: ')
     dados_restaurante = {'nome':nome_restaurante, 'categoria':categoria, 'ativo':False}
@@ -43,16 +46,23 @@ def cadastrar():
     voltar()
 
 def listar():
-    exibir_subtitulo('----- LISTA DE RESTAURANTES -----')
+    exibir_subtitulo('|     LISTA DE RESTAURANTES     |')
+
+    cabecalho = f'{'Nome do Restaurante'.ljust(22)} | {'Categoria'.ljust(20)} | {'Ativação'}'
+    linha = '-' * (len(cabecalho) + 4)
+    print(cabecalho)
+    print(linha)
     for item in restaurantes:
-        nome = item['nome']
+        nome_restaurante = item['nome']
         categoria = item['categoria']
-        ativo = item['ativo']
-        print(f'- {nome} | {categoria} | Ativação: {ativo}')
+        ativo = 'Ativado' if item['ativo'] else 'Desativado'
+        print(f'- {nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}')
+    
+    print()
     voltar()
 
 def ativar():
-    exibir_subtitulo('----- ALTERNANDO ESTADO DE ATIVAÇÃO -----')
+    exibir_subtitulo('|     ALTERNANDO ESTADO DE ATIVAÇÃO     |')
     nome_restaurante = input('Digite o nome do restaurante que deseja ativar/desativar: ')
     nome_verificado = False
 
@@ -67,10 +77,13 @@ def ativar():
             print(mensagem)
     if not nome_verificado:
         print('Restaurante não encontrado.')
+
+    print()
     voltar()
 
 def finalizar():
-    exibir_subtitulo('Finalizando o app...')
+    os.system('clear')
+    print('Finalizando o app...')
 
 def escolher_opcao():
     try:
