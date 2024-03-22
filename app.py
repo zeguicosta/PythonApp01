@@ -51,6 +51,24 @@ def listar():
         print(f'- {nome} | {categoria} | Ativação: {ativo}')
     voltar()
 
+def ativar():
+    exibir_subtitulo('----- ALTERNANDO ESTADO DE ATIVAÇÃO -----')
+    nome_restaurante = input('Digite o nome do restaurante que deseja ativar/desativar: ')
+    nome_verificado = False
+
+    for item in restaurantes:
+        if nome_restaurante == item['nome']:
+            nome_verificado = True
+            item['ativo'] = not item['ativo']
+            if item['ativo']:
+                mensagem = f'{nome_restaurante} ativado com sucesso!'
+            else:
+                mensagem = f'{nome_restaurante} desativado com sucesso!'
+            print(mensagem)
+    if not nome_verificado:
+        print('Restaurante não encontrado.')
+    voltar()
+
 def finalizar():
     exibir_subtitulo('Finalizando o app...')
 
@@ -63,7 +81,7 @@ def escolher_opcao():
             case 2:
                 listar()
             case 3:
-                print('Ativação de restaurantes')
+                ativar()
             case 4:
                 finalizar()
             case _:
