@@ -1,8 +1,8 @@
 import os
 
-restaurantes = [{'nome': 'UniCoffee', 'categoria': 'Café', 'ativo': True},
-                {'nome': 'PizzaPrime', 'categoria': 'Pizza', 'ativo': False},
-                {'nome': 'BarDoZé', 'categoria': 'Lanche', 'ativo': False}]
+restaurantes = [{'nome':'UniCoffee', 'categoria':'Café', 'ativo':True},
+                {'nome':'PizzaPrime', 'categoria':'Pizza', 'ativo':False},
+                {'nome':'BarDoZé', 'categoria':'Lanche', 'ativo':False}]
 
 def exibir_titulo():
     print('''
@@ -36,7 +36,9 @@ def exibir_subtitulo(texto):
 def cadastrar():
     exibir_subtitulo('------ CADASTRO DE NOVOS RESTAURANTES -----')
     nome_restaurante = input('Digite o nome do restaurante que deseja cadastrar: ')
-    restaurantes.append(nome_restaurante)
+    categoria = input(f'Digite a categoria de {nome_restaurante}: ')
+    dados_restaurante = {'nome':nome_restaurante, 'categoria':categoria, 'ativo':False}
+    restaurantes.append(dados_restaurante)
     print(f'{nome_restaurante} cadastrado com sucesso!\n')
     voltar()
 
@@ -61,7 +63,7 @@ def escolher_opcao():
             case 2:
                 listar()
             case 3:
-                print('Restaurante ativado.')
+                print('Ativação de restaurantes')
             case 4:
                 finalizar()
             case _:
